@@ -1,0 +1,14 @@
+<!-- src/app/layout/root/root.component.html -->
+<main class="flex h-screen w-full font-inter">
+  <app-sidebar [User]="loggedIn"></app-sidebar>
+  
+  <div class="flex size-full flex-col">
+    <div class="root-layout">
+      <img src="assets/icons/logo.svg" alt="menu" class="w-11 h-11" />
+      <div class="">
+        <app-mobnavbar [User]="loggedIn"></app-mobnavbar>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</main>

@@ -1,0 +1,21 @@
+<section class="total-balance">
+  
+  <div class="total-balance-chart">
+    <app-doughnutchart></app-doughnutchart>
+  </div>
+
+  <div class="flex flex-col gap-4 items-center ">
+    <h2 class="header-2">Bank Accounts: &nbsp; {{ totalBanks }}</h2>
+    <div class="flex flex-col items-center justify-center text-center gap-2">
+      <p class="total-balance-label">Total Balance:</p>
+      <div class="total-balance-amount gap-2">
+        <p
+          [countUp]="totalBalance"
+          [options]="{ decimalPlaces: 2, prefix: '$', duration: 1.15 }"
+        >
+          0
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
