@@ -44,7 +44,6 @@ export class MobnavbarComponent implements OnInit {
   }
 
   toggleMenu() {
-    console.log('toggleMenu');
     this.menuVisible = !this.menuVisible;
     if (this.menuVisible) {
       this.elementRef.nativeElement
