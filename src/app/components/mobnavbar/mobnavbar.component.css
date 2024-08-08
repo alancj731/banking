@@ -1,0 +1,12 @@
+.menuicon {
+  z-index: 1000;
+}
+
+.dropdown {
+  position: fixed;
+  top: 60px;
+  right: 18px;
+  z-index: 999;
+  opacity: 1;
+  @apply w-10 flex flex-col items-start justify-center font-semibold space-y-4;
+}

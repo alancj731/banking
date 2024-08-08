@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input, AfterViewInit, ElementRef } from '@angular/core';
 import { ChartData } from 'chart.js';
 import { Chart, registerables } from 'chart.js/auto';
 Chart.register(...registerables);
@@ -12,7 +12,7 @@ Chart.register(...registerables);
 })
 export class DoughnutchartComponent  implements AfterViewInit {
   
-  constructor() { }
+  constructor(private elementRef: ElementRef) { }
 
   @Input() data: ChartData = {
     labels: ['TD Bank', 'BMO Bank', 'CIBC Bank'],
@@ -45,7 +45,6 @@ export class DoughnutchartComponent  implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log('DoughnutchartComponent initialized');
     this.RenderChart();
   }
   
