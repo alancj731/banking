@@ -1,0 +1,42 @@
+<div class="flex flex-col">
+  <a href="/" class="bank-card">
+    <div class="bank-card_content">
+      <div>
+        <div class="text-16 font-semibold text-white">
+          {{ account.name || userName }}
+        </div>
+        <p class="font-ibm-plex-serif font-black text-white">
+          {{ formatAmount(account.currentBalance) }}
+        </p>
+      </div>
+      <article class="flex flex-col gap-2">
+        <div class="flex justify-between">
+          <h1 class="text-12 font-semibold text-white">
+            {{ userName }}
+          </h1>
+          <h2 class="text-12 font-semibold text-white">●●/●●</h2>
+        </div>
+        <p class="text-14 text-white font-semibold tracing-[1.1px]">
+          ●●●● ●●●● ●●●● <span class="text-16">1234</span>
+        </p>
+      </article>
+    </div>
+    <div class="bank-card_icon">
+      <div class="w-full flex justify-center pl-2">
+        <img src="assets/icons/Paypass.svg" alt="pay" class="w-8 h-4" />
+      </div>
+      <div class="w-full flex flex-row justify-end pl-3">
+        <img
+          src="assets/icons/mastercard.svg"
+          alt="mastercard"
+          class="w-20 h-10"
+        />
+      </div>
+      <img
+        src="assets/icons/lines.png"
+        alt="lines"
+        class="w-[380px] h-[190px] absolute top-0 left-0"
+      />
+    </div>
+  </a>
+</div>
