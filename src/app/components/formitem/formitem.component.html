@@ -1,0 +1,23 @@
+<div class="form-item mt-8">
+    <label
+      for={{controlName}}
+      class="block text-gray-700 text-sm font-medium mb-2"
+      >{{label}}:</label
+    >
+    <div [formGroup]="formGroup" class="flex w-full flex-col">
+      <input
+        id={{controlName}}
+        type={{type}}
+        formControlName={{controlName}}
+        class="h-10 mt-2 border-1 bg-slate-50 border-gray-300 focus:border-gray-500 transition duration-150 ease-in-out"
+        placeholder={{placeholder}}
+      />
+    </div>
+    <div *ngIf="errors[controlName]">
+      <small
+        class="text-red-400 mt-2"
+        *ngFor="let error of errors[controlName]._errors"
+        >{{ error }}</small
+      >
+    </div>
+  </div>

@@ -1,0 +1,140 @@
+<section class="auth-f">
+  <header class="flex flex-col items-center gap-5 md:gap-8">
+    <a href="/" class="flex items-center gap-2">
+      <img
+        src="assets/icons/logo.svg"
+        alt="logo"
+        class="size-[24px] max-xl:size-12"
+      />
+      <h1 class="sidebar-logo mr-3">Horizon</h1>
+    </a>
+    <div class="flex flex-col items-center gap-1 md:gap-3">
+      <h1 class="text-24 font-semibold text-gray-900 lg:text-30">
+        {{ getTitle() }}
+      </h1>
+      <p class="text-12 font-normal text-gray-600">
+        {{
+          user
+            ? "Link you account to start using Horizon"
+            : "Please enter your details"
+        }}
+      </p>
+    </div>
+  </header>
+
+  <div *ngIf="user; else noUser" class="flex flex-col items-center gap-4">
+    <!-- to do: enter a link here  -->
+  </div>
+  <ng-template #noUser>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="mt-4 space-y-8">
+      <div *ngIf="type === 'sign-up'">
+        <div class="flex gap-4">
+          <app-formitem
+            [formGroup]="myForm"
+            [controlName]="'firstName'"
+            [label]="'First Name'"
+            [type]="'text'"
+            [placeholder]="'ex: John'"
+            [errors]="formErrors"
+          ></app-formitem>
+
+          <app-formitem
+            [formGroup]="myForm"
+            [controlName]="'lastName'"
+            [label]="'Last Name'"
+            [type]="'text'"
+            [placeholder]="'ex: Doe'"
+            [errors]="formErrors"
+          ></app-formitem>
+        </div>
+
+        <app-formitem
+          [formGroup]="myForm"
+          [controlName]="'address'"
+          [label]="'Address'"
+          [type]="'text'"
+          [placeholder]="'Please enter your address'"
+          [errors]="formErrors"
+        ></app-formitem>
+
+        <div class="flex gap-4">
+          <app-formitem
+            [formGroup]="myForm"
+            [controlName]="'state'"
+            [label]="'State'"
+            [type]="'text'"
+            [placeholder]="'ex: NY'"
+            [errors]="formErrors"
+          ></app-formitem>
+
+          <app-formitem
+            [formGroup]="myForm"
+            [controlName]="'postalCode'"
+            [label]="'Postal Code'"
+            [type]="'text'"
+            [placeholder]="'ex: 11101'"
+            [errors]="formErrors"
+          ></app-formitem>
+        </div>
+
+        <div class="flex gap-4">
+          <app-formitem
+            [formGroup]="myForm"
+            [controlName]="'dateOfBirth'"
+            [label]="'Date of Birth'"
+            [type]="'text'"
+            [placeholder]="'yyyy-mm-dd'"
+            [errors]="formErrors"
+          ></app-formitem>
+
+          <app-formitem
+            [formGroup]="myForm"
+            [controlName]="'ssn'"
+            [label]="'SSN'"
+            [type]="'text'"
+            [placeholder]="'ex: 1234'"
+            [errors]="formErrors"
+          ></app-formitem>
+        </div>
+      </div>
+
+      <app-formitem
+        [formGroup]="myForm"
+        [controlName]="'email'"
+        [label]="'Email'"
+        [type]="'email'"
+        [placeholder]="'Please enter your Email address'"
+        [errors]="formErrors"
+      ></app-formitem>
+
+      <app-formitem
+        [formGroup]="myForm"
+        [controlName]="'password'"
+        [label]="'Password'"
+        [type]="'password'"
+        [placeholder]="'********'"
+        [errors]="formErrors"
+      ></app-formitem>
+
+      <div class="w-full flex flex-col pt-8">
+        <button
+          class="bg-sky-500 hover:bg-sky-600 text-white py-2 px-4 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-50 transition duration-200 ease-in-out"
+          type="submit"
+        >
+          {{ type === "sign-in" ? "Sign In" : "Sign Up" }}
+        </button>
+      </div>
+    </form>
+  </ng-template>
+  <footer class="flex justify-center gap-1 mt-8">
+    <p>
+      {{ type === "sign-in" ? "New to Horizon?" : "Already have an account?" }}
+    </p>
+    <a
+      [href]="type === 'sign-in' ? 'signup' : 'signin'"
+      class="text-sky-500 hover:text-sky-600"
+    >
+      &nbsp;{{ type === "sign-in" ? "Sign Up" : "Sign In" }}
+    </a>
+  </footer>
+</section>
