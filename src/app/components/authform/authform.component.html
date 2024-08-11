@@ -56,6 +56,15 @@
           [placeholder]="'Please enter your address'"
           [errors]="formErrors"
         ></app-formitem>
+        
+        <app-formitem
+        [formGroup]="myForm"
+        [controlName]="'city'"
+        [label]="'City'"
+        [type]="'text'"
+        [placeholder]="'Please enter your city'"
+        [errors]="formErrors"
+      ></app-formitem>
 
         <div class="flex gap-4">
           <app-formitem
