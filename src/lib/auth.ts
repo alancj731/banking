@@ -4,26 +4,32 @@ import axios from 'axios';
 const URL = 'http://localhost:3000/users/';
 
 export const SignUp = async (formData: any) => {
-  const { email, firstName, lastName } = formData;
+  const { email, password, firstName, lastName } = formData;
 
-  if (!email || !firstName || !lastName) {
+  console.log('sign up:', email, password, firstName, lastName);
+
+  if (!email || !password || !firstName || !lastName) {
     console.log('Missing required fields');
-    return false;
+    return null;
   }
 
   try {
-    const response = await axios.post(URL+'signup', {
+    const response = await axios.post(URL + 'signup', {
+      name: firstName + ' ' + lastName,
       email,
-      firstName,
-      lastName,
+      password,
     });
     console.log('response:', response);
-  } catch (error) {
-    console.log('Error:', error);
-    return false;
-  }
 
-  return true;
+    // response.data is userId
+    return response.data;
+  
+  } catch (error) {
+  
+    console.log('Error:', error);
+  
+    return null;
+  }
 };
 
 export const SignIn = async (formData: any) => {
@@ -31,19 +37,19 @@ export const SignIn = async (formData: any) => {
 
   if (!email || !password) {
     console.log('Missing mail or password');
-    return false;
+    return null;
   }
 
   try {
-    const response = await axios.post(URL+'signin', {
+    const response = await axios.post(URL + 'signin', {
       email,
-      password
+      password,
     });
-    console.log('response:', response);
-  } catch (error) {
-    console.log('Error:', error);
-    return false;
-  }
+    return response;
 
-  return true;
+  } catch (error) {
+    
+    console.log('Error:', error);
+    return null;
+  }
 };

@@ -7,6 +7,9 @@ import { z } from 'zod';
 import { FormitemComponent } from '../formitem/formitem.component';
 import { Router } from '@angular/router';
 import { SignIn, SignUp } from 'src/lib/auth';
+import { CookieService } from 'ngx-cookie-service';
+
+const TOKEN_NAME = 'appwrite-token';
 
 @Component({
   selector: 'app-authform',
@@ -19,7 +22,11 @@ export class AuthformComponent {
   myForm: FormGroup;
   formErrors: any = {};
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private cookieService: CookieService
+  ) {
     this.myForm = this.fb.group({
       firstName: [''],
       lastName: [''],
@@ -52,20 +59,41 @@ export class AuthformComponent {
         // Sign in user
         console.log('sign in a user', formData);
         const response = await SignIn(formData);
-        console.log('SignIn response:', response);
+        return this.handleSignInResponse(response);
       } else {
         // Sign up user
         console.log('sign up for a user', formData);
         const response = await SignUp(formData);
-        console.log('SignIn response:', response);
+        return this.handleSignUpResponse(response);
       }
-
-      return true;
     } catch (error) {
       console.log('Error:', error);
       return false;
     }
   };
+
+  setCookie(key: string, value: string, days: number) {
+    this.cookieService.set(key, value, days);
+  }
+
+  handleSignInResponse(response: any) {
+    if (response) {
+      console.log('Sign in successful, token=', response.data);
+      // save token to local storage
+      // to do
+      this.setCookie(TOKEN_NAME, response.data, 1);
+      return true;
+    }
+    return false;
+  }
+
+  handleSignUpResponse(response: any) {
+    if (response) {
+      console.log('Sign up successful, userId=', response.data);
+      return true;
+    }
+    return false;
+  }
 
   @Input() type: 'sign-in' | 'sign-up' = 'sign-in';
   user: unknown = null;
