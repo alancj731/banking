@@ -141,3 +141,6 @@ export const transactionCategoryStyles = {
     chipBackgroundColor: 'bg-inherit',
   },
 };
+
+export const SESSION_ID = 'appwrite-token';
+export const BACKEND_URL = 'http://localhost:3000/';

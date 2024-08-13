@@ -1,4 +1,10 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+  Injectable,
+  Inject,
+  PLATFORM_ID,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -8,9 +14,12 @@ import { FormitemComponent } from '../formitem/formitem.component';
 import { Router } from '@angular/router';
 import { SignIn, SignUp } from 'src/lib/auth';
 import { CookieService } from 'ngx-cookie-service';
+import { SESSION_ID } from 'src/constants/index';
+import { getUser } from 'src/lib/user';
 
-const TOKEN_NAME = 'appwrite-token';
-
+@Injectable({
+  providedIn: 'root',
+})
 @Component({
   selector: 'app-authform',
   standalone: true,
@@ -52,23 +61,22 @@ export class AuthformComponent {
         console.log('Form data is invalid');
         this.formErrors = error.format();
       }
-      return false;
     }
     try {
       if (this.type === 'sign-in') {
-        // Sign in user
-        console.log('sign in a user', formData);
         const response = await SignIn(formData);
-        return this.handleSignInResponse(response);
+        this.handleSignInResponse(response);
+        // const loggedInUser = await this.getLoggedInUser();
+        // console.log('Logged in user:', loggedInUser);
+        // if (loggedInUser) {
+        //   this.user = loggedInUser;
+        // }
       } else {
-        // Sign up user
-        console.log('sign up for a user', formData);
         const response = await SignUp(formData);
-        return this.handleSignUpResponse(response);
+        this.handleSignUpResponse(response);
       }
     } catch (error) {
       console.log('Error:', error);
-      return false;
     }
   };
 
@@ -78,10 +86,10 @@ export class AuthformComponent {
 
   handleSignInResponse(response: any) {
     if (response) {
-      console.log('Sign in successful, token=', response.data);
-      // save token to local storage
-      // to do
-      this.setCookie(TOKEN_NAME, response.data, 1);
+      console.log('Sign in successful, user=', response.data);
+      // save
+      this.setCookie(SESSION_ID, response.data.secret, 1);
+      this.user = response.data;
       return true;
     }
     return false;
@@ -89,10 +97,21 @@ export class AuthformComponent {
 
   handleSignUpResponse(response: any) {
     if (response) {
-      console.log('Sign up successful, userId=', response.data);
+      // response.data is the newly created user
+      const newUser = response.data;
+      this.user = newUser;
       return true;
     }
     return false;
+  }
+
+  async getLoggedInUser() {
+    const token = this.cookieService.get(SESSION_ID);
+    if (!token || token === '') {
+      console.log('No session found');
+      return null;
+    }
+    return await getUser(token);
   }
 
   @Input() type: 'sign-in' | 'sign-up' = 'sign-in';

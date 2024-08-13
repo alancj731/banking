@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { BACKEND_URL } from 'src/constants';
 
 // to do: hard coded here, modify later
-const URL = 'http://localhost:3000/users/';
+const USER_URL = BACKEND_URL + 'users/';
 
 export const SignUp = async (formData: any) => {
   const { email, password, firstName, lastName } = formData;
@@ -14,20 +15,17 @@ export const SignUp = async (formData: any) => {
   }
 
   try {
-    const response = await axios.post(URL + 'signup', {
+    const response = await axios.post(USER_URL + 'signup', {
       name: firstName + ' ' + lastName,
       email,
       password,
     });
-    console.log('response:', response);
 
-    // response.data is userId
-    return response.data;
-  
+    // response.data is the user object
+    return response;
   } catch (error) {
-  
     console.log('Error:', error);
-  
+
     return null;
   }
 };
@@ -41,14 +39,12 @@ export const SignIn = async (formData: any) => {
   }
 
   try {
-    const response = await axios.post(URL + 'signin', {
+    const response = await axios.post(USER_URL + 'signin', {
       email,
       password,
     });
     return response;
-
   } catch (error) {
-    
     console.log('Error:', error);
     return null;
   }
