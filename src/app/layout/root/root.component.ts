@@ -18,10 +18,8 @@ export class RootComponent implements OnInit {
 
   async ngOnInit() {
     const token = this.cookieService.get(SESSION_ID);
-    console.log('token',token);
     if (token) {
       this.loggedIn = await getUser(token);
-      console.log('token',this.loggedIn);
     }
   }
   loggedIn = null;

@@ -3,11 +3,12 @@ import { sidebarLinks } from 'src/constants';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { cn} from 'src/lib/utils';
+import {FooterComponent} from 'src/app/components/footer/footer.component';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FooterComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })

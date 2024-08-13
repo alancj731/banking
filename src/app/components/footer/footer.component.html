@@ -1,1 +1,21 @@
-<p>footer works!</p>
+<footer class="footer">
+  <div [ngClass]="type === 'mobile' ? 'footer_name-mobile' : 'footer_name'">
+    <p class="text-xl font-bold text-gray-700">
+      {{ User ? User.name[0] : "" }}
+    </p>
+  </div>
+
+  <div [ngClass]="type === 'mobile' ? 'footer_email-mobile' : 'footer_email'">
+    <h1 class="text-14 truncate font-semibold text-gray-700">
+      {{ User ? User.name : "" }}
+    </h1>
+
+    <p class="text-14 truncate font-normal text-gray-600">
+      {{ User ? User.email : "" }}
+    </p>
+  </div>
+
+  <div class="footer-image">
+    <img src="assets/icons/logout.svg" fill alt="logout" (click)="handleLogout()" />
+  </div>
+</footer>

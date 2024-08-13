@@ -18,7 +18,7 @@ export class MobnavbarComponent implements OnInit {
   currentPath: string = '';
   sidebarLinks = sidebarLinks;
 
-  @Input() User : any = null;
+  @Input() User: any = null;
 
   ngOnInit() {
     this.currentPath = this.router.url;
@@ -36,7 +36,7 @@ export class MobnavbarComponent implements OnInit {
   getLinkClass(route: string): string {
     return cn('sidebar-link', {
       'bg-bank-gradient': this.isActive(route),
-    });;
+    });
   }
 
   getIconImgClass(route: string): string {
