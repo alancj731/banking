@@ -43,6 +43,6 @@ export class SidebarComponent implements OnInit {
     });
   }
 
-  @Input() User = { firstName: 'John', lastName: 'Doe' };
+  @Input() User: any = null;
   sidebarLinks = sidebarLinks;
 }

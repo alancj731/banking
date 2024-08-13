@@ -18,7 +18,7 @@ export class MobnavbarComponent implements OnInit {
   currentPath: string = '';
   sidebarLinks = sidebarLinks;
 
-  @Input() User = { firstName: 'John', lastName: 'Doe' };
+  @Input() User : any = null;
 
   ngOnInit() {
     this.currentPath = this.router.url;
