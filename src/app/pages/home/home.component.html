@@ -4,7 +4,7 @@
       <app-headerbox
         [type]="'greeting'"
         [title]="'Welcome'"
-        [user]="loggedIn.firstName || 'Guest'"
+        [user]="loggedIn? loggedIn.name : 'Guest'"
         [subText]="'Access and manage your account and transactions easier!'"
       ></app-headerbox>
       <app-totalbalancebox

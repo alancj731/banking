@@ -107,7 +107,6 @@ export class AuthformComponent {
   async getLoggedInUser() {
     const token = this.cookieService.get(SESSION_ID);
     if (!token || token === '') {
-      console.log('No session found');
       return null;
     }
     return await getUser(token);

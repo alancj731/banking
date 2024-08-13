@@ -10,7 +10,7 @@ import { BankcardComponent } from '../bankcard/bankcard.component';
   styleUrl: './rightsidebar.component.css',
 })
 export class RightsidebarComponent {
-  @Input() user = { firstName: 'Jian', lastName: 'Chen', email:'jian@gmail.com' };
+  @Input() user = { name: 'Chen', email:'jian@gmail.com' };
   @Input() transactions: any[] = [];
   @Input() banks: any[] = [];
 }

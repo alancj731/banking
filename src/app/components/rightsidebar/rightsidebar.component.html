@@ -4,13 +4,13 @@
       <div class="profile">
         <div class="profile-img">
           <span class="text-3xl text-blue-500 font-bold">
-            {{ user.firstName[0] }}
+            {{ user? user.name[0] : 'G' }}
           </span>
         </div>
         <div class="profile-details">
-          <h1 class="profile-name">{{ user.firstName }} {{ user.lastName }}</h1>
+          <h1 class="profile-name">{{ user? user.name : '' }}</h1>
           <p class="profile-email">
-            {{ user.email }}
+            {{ user? user.email : '' }}
           </p>
         </div>
       </div>
@@ -35,7 +35,7 @@
         <app-bankcard
           key="banks[0].id"
           [account]="banks[0]"
-          [userName]="user.firstName + ' ' + user.lastName"
+          [userName]="this.user? this.user.name: ''"
           [showBalance]="false"
         >
         </app-bankcard>
@@ -45,7 +45,7 @@
         <app-bankcard
           key="banks[1].id"
           [account]="banks[1]"
-          [userName]="user.firstName + ' ' + user.lastName"
+          [userName]="this.user? this.user.name : ''"
           [showBalance]="false"
         >
         </app-bankcard>
