@@ -5,6 +5,7 @@ import { MobnavbarComponent } from '@app/components/mobnavbar/mobnavbar.componen
 import { getUser } from 'src/lib/user';
 import { CookieService } from 'ngx-cookie-service';
 import { SESSION_ID } from 'src/constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +15,17 @@ import { SESSION_ID } from 'src/constants';
   styleUrl: './root.component.css'
 })
 export class RootComponent implements OnInit {
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService, private router: Router) { }
 
   async ngOnInit() {
     const token = this.cookieService.get(SESSION_ID);
     if (token) {
       this.loggedIn = await getUser(token);
+    }
+    if (!token || !this.loggedIn) {
+      if (this.router.url !== '/signin' && this.router.url !== '/signup') {
+        this.router.navigate(['/signin']);
+      }
     }
   }
   loggedIn = null;
