@@ -86,10 +86,9 @@ export class AuthformComponent {
 
   handleSignInResponse(response: any) {
     if (response) {
-      console.log('Sign in successful, user=', response.data);
-      // save
       this.setCookie(SESSION_ID, response.data.secret, 1);
       this.user = response.data;
+      this.router.navigate(['/']);
       return true;
     }
     return false;
