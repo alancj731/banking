@@ -8,7 +8,7 @@ import { SESSION_ID } from 'src/constants';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-layout-root',
   standalone: true,
   imports: [RouterModule, SidebarComponent, MobnavbarComponent],
   templateUrl: './root.component.html',

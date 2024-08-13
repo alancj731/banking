@@ -66,11 +66,6 @@ export class AuthformComponent {
       if (this.type === 'sign-in') {
         const response = await SignIn(formData);
         this.handleSignInResponse(response);
-        // const loggedInUser = await this.getLoggedInUser();
-        // console.log('Logged in user:', loggedInUser);
-        // if (loggedInUser) {
-        //   this.user = loggedInUser;
-        // }
       } else {
         const response = await SignUp(formData);
         this.handleSignUpResponse(response);
