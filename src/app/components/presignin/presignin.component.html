@@ -1,0 +1,21 @@
+<div class="min-h-screen w-full flex justify-center lg:justify-between font-inter">
+  <div class="w-full lg:w-1/3 flex justify-center ">
+    <div *ngIf="url === '/signin'; else signup">
+      <app-signin></app-signin>
+    </div>
+
+    <ng-template #signup>
+      <app-signup></app-signup>
+    </ng-template>
+  </div>
+
+  <div class="hidden lg:w-2/3 lg:flex">
+    <div class="auth-asset">
+      <img
+        src="assets/icons/auth-image.svg"
+        alt="auth-image"
+        class="w-3/4 h-3/4"
+      />
+    </div>
+  </div>
+</div>
