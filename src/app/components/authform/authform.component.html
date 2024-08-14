@@ -106,7 +106,7 @@
           ></app-formitem>
         </div>
       </div>
-      <div [ngClass]="type === 'sign-up'? 'ml-10' : ''">
+      <div [ngClass]="type === 'sign-up' ? 'ml-10' : ''">
         <app-formitem
           [formGroup]="myForm"
           [controlName]="'email'"
@@ -126,11 +126,13 @@
         ></app-formitem>
       </div>
 
-      <div class="w-full flex flex-col pt-8">
+      <div class="w-full flex justify-center pt-8">
         <button
-          class="bg-sky-500 hover:bg-sky-600 text-white py-2 px-4 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-50 transition duration-200 ease-in-out"
+          class="flex bg-sky-500 hover:bg-sky-600 text-white py-2 px-4 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-50 transition duration-200 ease-in-out"
           type="submit"
+          [disabled]="isLoading"
         >
+          <app-loader *ngIf="isLoading"></app-loader>
           {{ type === "sign-in" ? "Sign In" : "Sign Up" }}
         </button>
       </div>

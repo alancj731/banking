@@ -2,10 +2,9 @@ import {
   Component,
   Input,
   Injectable,
-  Inject,
-  PLATFORM_ID,
+  NgModule,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule} from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserSchema, UserForm } from 'src/lib/form.schema';
@@ -16,6 +15,7 @@ import { SignIn, SignUp } from 'src/lib/auth';
 import { CookieService } from 'ngx-cookie-service';
 import { SESSION_ID } from 'src/constants/index';
 import { getUser } from 'src/lib/user';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Injectable({
   providedIn: 'root',
@@ -23,13 +23,14 @@ import { getUser } from 'src/lib/user';
 @Component({
   selector: 'app-authform',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormitemComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormitemComponent, LoaderComponent],
   templateUrl: './authform.component.html',
   styleUrl: './authform.component.css',
 })
 export class AuthformComponent {
   myForm: FormGroup;
   formErrors: any = {};
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -51,7 +52,7 @@ export class AuthformComponent {
   }
   onSubmit = async () => {
     const formData: UserForm<'sign-in' | 'sign-up'> = this.myForm.value;
-
+    this.isLoading = true;
     try {
       // Validate form data using Zod schema
       UserSchema(this.type).parse(formData);
@@ -72,6 +73,9 @@ export class AuthformComponent {
       }
     } catch (error) {
       console.log('Error:', error);
+    }
+    finally {
+      this.isLoading = false;
     }
   };
 
